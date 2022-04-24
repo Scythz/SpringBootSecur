@@ -3,10 +3,6 @@ package com.example.springboot.models;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 
 @Entity
@@ -18,17 +14,12 @@ public class User {
     private int id;
 
     @Column
-    @NotEmpty(message = "Имя не должно быть пустым")
-    @Size(min = 2, max = 20, message = "Имя должно быть от 2 до 20 знаков")
     private String name;
 
     @Column
-    @Min(value = 0, message = "Возраст должен быть больше 0")
     private int age;
 
     @Column
-    @NotEmpty(message = "email должен быть не пустым")
-    @Email(message = "email введен неправильно")
     private String email;
 
     public User(int id, String name, int age, String email) {

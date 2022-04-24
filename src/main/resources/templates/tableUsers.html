@@ -20,10 +20,10 @@
             <td th:text="${user.age}">Age</td>
             <td th:text="${user.email}">Email</td>
             <td>
-                <form th:method="GET" th:action="@{/{id}/edit(id=${user.getId()})}">
+                <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
                     <input type="submit" value="Edit">
                 </form>
-                <form th:method="DELETE" th:action="@{/delete/{id}(id=${user.getId()})}">
+                <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
                     <input type="submit" value="Delete">
                 </form>
                 <br>
@@ -34,7 +34,7 @@
 
 <br>
 <hr>
-<form th:method="GET" th:action="@{/new}">
+<form th:method="GET" th:action="@{/admin/new}">
     <input type="submit" value="Create new user">
 </form>
 

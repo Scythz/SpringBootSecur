@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> index() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User show(int id) {
+    public User getUserById(int id) {
         User user = null;
         Optional<User> optional = userRepository.findById(id);
         if (optional.isPresent()) {
@@ -34,14 +34,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void save(User user) {
+    public void saveUser(User user) {
         userRepository.save(user);
 
     }
 
     @Override
-    public void update(int id, User updatedUser) {
-        updatedUser.setId(show(id).getId());
+    public void updateUser(int id, User updatedUser) {
+        updatedUser.setId(getUserById(id).getId());
         userRepository.save(updatedUser);
 
     }

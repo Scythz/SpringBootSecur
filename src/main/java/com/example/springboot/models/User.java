@@ -1,8 +1,8 @@
 package com.example.springboot.models;
 
 
-
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -22,14 +22,30 @@ public class User {
     @Column
     private String email;
 
-    public User(int id, String name, int age, String email) {
-        this.id = id;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    public User(String name, int age, String email, Set<Role> roles) {
         this.name = name;
         this.age = age;
         this.email = email;
+        this.roles = roles;
     }
-    public User(){
 
+    public User() {
+
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
 

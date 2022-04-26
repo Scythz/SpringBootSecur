@@ -19,6 +19,7 @@
             <td th:text="${user.name}" >Name</td>
             <td th:text="${user.age}">Age</td>
             <td th:text="${user.email}">Email</td>
+            <td th:text="${user.roles}">Roles</td>
             <td>
                 <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
                     <input type="submit" value="Edit">

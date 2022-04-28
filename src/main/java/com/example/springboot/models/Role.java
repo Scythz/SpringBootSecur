@@ -1,9 +1,11 @@
 package com.example.springboot.models;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +15,15 @@ public class Role {
     private String name;
 
     public Role() {
+    }
 
+    public Role(int id) {
+        this.id = id;
+    }
+
+    public Role(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Role(String name) {
@@ -41,6 +51,11 @@ public class Role {
 
     @Override
     public String toString() {
+        return name;
+    }
+
+    @Override
+    public String getAuthority() {
         return name;
     }
 }

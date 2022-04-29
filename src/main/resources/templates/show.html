@@ -5,14 +5,34 @@
     <title>Человек</title>
 </head>
 <body>
-<p th:text="${user.getName() + ', ' + user.getAge()}">VALUE</p>
-<p th:text="${user.getEmail()}">VALUE</p>
-<p th:text="${user.getId()}">VALUE</p>
 
-<a th:href="@{admin/{id}/edit(id=${user.getId()})}">Edit</a>
+<table style="height: 36px; width: 100%; border-collapse: collapse; border-style: solid; margin-left: auto; margin-right: auto;"
+       border="2">
+    <caption>&nbsp;</caption>
+    <tbody>
+    <tr style="height: 18px;">
+        <td style="width: 12.5%; height: 18px; text-align: center;">ID</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">NAME</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">AGE</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">EMAIL</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">ROLES</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">USERNAME</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">PASSWORD</td>
+    </tr>
+    <td th:text="${user.id}" style="width: 12.5%; height: 18px; text-align: center;">id</td>
+    <td th:text="${user.name}" style="width: 12.5%; height: 18px; text-align: center;">name</td>
+    <td th:text="${user.age}" style="width: 12.5%; height: 18px; text-align: center;">age</td>
+    <td th:text="${user.email}" style="width: 12.5%; height: 18px; text-align: center;">email</td>
+    <td th:text="${user.roles}" style="width: 12.5%; height: 18px; text-align: center;">roles</td>
+    <td th:text="${user.username}" style="width: 12.5%; height: 18px; text-align: center;">username</td>
+    <td th:text="${user.password}" style="width: 12.5%; height: 18px; text-align: center;">pwd</td>
+    </tbody>
+</table>
 
-<form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
-    <input type="submit" value="Delete">
+<br><br><br><br><br>
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="LOGOUT">
 </form>
+
 </body>
 </html>

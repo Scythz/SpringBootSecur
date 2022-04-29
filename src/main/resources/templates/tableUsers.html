@@ -6,30 +6,40 @@
 </head>
 <body>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Email</th>
-        <th>Action</th>
+<table style="height: 36px; width: 100%; border-collapse: collapse; border-style: solid; margin-left: auto; margin-right: auto;"
+       border="2">
+    <caption>&nbsp;</caption>
+    <tbody>
+    <tr style="height: 18px;">
+        <td style="width: 12.5%; height: 18px; text-align: center;">ID</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">NAME</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">AGE</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">EMAIL</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">ROLES</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">USERNAME</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">PASSWORD</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">ACTION</td>
     </tr>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}">ID</td>
-            <td th:text="${user.name}" >Name</td>
-            <td th:text="${user.age}">Age</td>
-            <td th:text="${user.email}">Email</td>
-            <td th:text="${user.roles}">Roles</td>
-            <td>
-                <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
-                    <input type="submit" value="Edit">
-                </form>
-                <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
-                    <input type="submit" value="Delete">
-                </form>
-                <br>
-            </td>
-        </tr>
+    <tr th:each="user : ${users}" style="height: 18px;">
+        <td th:text="${user.id}" style="width: 12.5%; height: 18px; text-align: center;">id</td>
+        <td th:text="${user.name}" style="width: 12.5%; height: 18px; text-align: center;">name</td>
+        <td th:text="${user.age}" style="width: 12.5%; height: 18px; text-align: center;">age</td>
+        <td th:text="${user.email}" style="width: 12.5%; height: 18px; text-align: center;">email</td>
+        <td th:text="${user.roles}" style="width: 12.5%; height: 18px; text-align: center;">roles</td>
+        <td th:text="${user.username}" style="width: 12.5%; height: 18px; text-align: center;">username</td>
+        <td th:text="${user.password}" style="width: 12.5%; height: 18px; text-align: center;">pwd</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;">
+            <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
+                <input type="submit" value="Edit">
+            </form>
+            <br>
+            <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete">
+            </form>
+            <br>
+        </td>
+    </tr>
+    </tbody>
 </table>
 
 
@@ -37,6 +47,12 @@
 <hr>
 <form th:method="GET" th:action="@{/admin/new}">
     <input type="submit" value="Create new user">
+</form>
+
+<br><br>
+
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="LOGOUT">
 </form>
 
 </body>

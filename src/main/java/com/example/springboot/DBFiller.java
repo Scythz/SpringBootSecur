@@ -24,7 +24,7 @@ public class DBFiller {
     @PostConstruct
     public void generateUsers() {
         for (int i = 1; i <= 5; i++) {
-            userService.saveUser(new User("Kekw"+i, 15+i, "15@14.12+i", "user"+i, "user"+i,
+            userService.saveUser(new User("User" + i, 15 + i, "User" + i + "mail.ru", "user" + i, "user" + i,
                     new HashSet<>(Collections.singletonList(
                             roleService.getOrCreateRole("ROLE_USER")
                     ))
@@ -33,7 +33,7 @@ public class DBFiller {
 
         userService.saveUser(new User(
                 "admin",
-                15,
+                7,
                 "admin@mail.com",
                 "admin",
                 "admin",

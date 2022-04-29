@@ -1,29 +1,28 @@
 package com.example.springboot.service;
 
 import com.example.springboot.dao.UserRepository;
-import com.example.springboot.models.Role;
 import com.example.springboot.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
+    private final RoleService roleService;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder bCryptPasswordEncoder, RoleService roleService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -44,8 +43,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUser(User user, String[] roles) {
+        user.setRoles(new HashSet<>());
+        for (String role : roles) {
+            user.addRole(roleService.getOrCreateRole(role));
+        }
+        saveUser(user);
+    }
+
+
+    @Override
     public void updateUser(int id, User user) {
-        if(user.getPassword() == "") {
+        if (user.getPassword() == null) {
             user.setPassword(getUserById(user.getId()).getPassword());
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

@@ -6,20 +6,31 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/admin/}" th:object="${user}">
+<form th:method="PUT" th:action="@{/admin/}" th:object="${user}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name">
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name err</div>
     <br>
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age">
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age err</div>
     <br>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email err</div>
     <br>
+    <label for="name">Enter username: </label>
+    <input type="text" th:field="*{username}" id="username">
+    <br>
+    <label for="name">Enter password: </label>
+    <input type="text" th:field="*{password}" id="password">
+    <br>
+    <label for="roles">Roles</label><br>
+    <select name="selectedRoles" id="roles" multiple>
+        <option th:each="role : ${roles}" th:text="${role.name}" th:value="${role.name}"></option>
+    </select><br><br>
     <input type="submit" value="Create!">
+</form>
+
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="LOGOUT">
 </form>
 
 </body>

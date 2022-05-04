@@ -33,6 +33,7 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Column
     private Set<Role> roles;
 
     public User() {

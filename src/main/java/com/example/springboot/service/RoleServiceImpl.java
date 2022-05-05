@@ -1,33 +1,27 @@
 package com.example.springboot.service;
 
-import com.example.springboot.dao.RoleRepository;
+import com.example.springboot.dao.RoleDao;
 import com.example.springboot.models.Role;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    private final RoleRepository roleRepository;
+    private final RoleDao roleDao;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleServiceImpl(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Override
     public Role getOrCreateRole(String name) {
-        Role role = roleRepository.findByName(name);
-        if (role == null) {
-            role = new Role(name);
-            roleRepository.save(role);
-        }
-        return role;
+        return roleDao.getOrCreateRole(name);
     }
 
     @Override
     public Set<Role> getRoles() {
-        return new HashSet<>(roleRepository.findAll());
+        return roleDao.getRoles();
     }
 }

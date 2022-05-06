@@ -1,5 +1,6 @@
 package com.example.springboot.controllers;
 
+import com.example.springboot.models.Role;
 import com.example.springboot.models.User;
 import com.example.springboot.service.RoleService;
 import com.example.springboot.service.UserService;
@@ -53,7 +54,10 @@ public class AdminController {
     public String patchUser(@PathVariable("id") int id,
                             @ModelAttribute User user,
                             @RequestParam(value = "selectedRoles") String[] roles) {
-        us.saveUser(user, roles);
+        for (String role : roles) {
+            user.addRole(usr.getOrCreateRole(role));
+        }
+        us.updateUser(id, user);
         return "redirect:/admin";
     }
 

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        userDao.saveUser(user);
+        userDao.updateUser(id, user);
 
     }
 

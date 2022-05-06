@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        em.merge(user);
+        em.persist(user);
     }
 
     @Override

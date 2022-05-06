@@ -50,10 +50,7 @@ public class AdminController {
     public String patchUser(@PathVariable("id") int id,
                             @ModelAttribute User user,
                             @RequestParam(value = "selectedRoles") String[] roles) {
-        for (String role : roles) {
-            user.addRole(usr.getOrCreateRole(role));
-        }
-        us.updateUser(user);
+        us.updateUser(user,roles);
         return "redirect:/admin";
     }
 

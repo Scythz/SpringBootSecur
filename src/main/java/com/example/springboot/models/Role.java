@@ -40,6 +40,10 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

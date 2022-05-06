@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<table style="height: 36px; width: 100%; border-collapse: collapse; border-style: solid; margin-left: auto; margin-right: auto;"
-       border="2">
+<table border="2"
+       style="height: 36px; width: 100%; border-collapse: collapse; border-style: solid; margin-left: auto; margin-right: auto;">
     <caption>&nbsp;</caption>
     <tbody>
     <tr style="height: 18px;">
@@ -20,20 +20,20 @@
         <td style="width: 12.5%; height: 18px; text-align: center;">PASSWORD</td>
         <td style="width: 12.5%; height: 18px; text-align: center;">ACTION</td>
     </tr>
-    <tr th:each="user : ${users}" style="height: 18px;">
-        <td th:text="${user.id}" style="width: 12.5%; height: 18px; text-align: center;">id</td>
-        <td th:text="${user.name}" style="width: 12.5%; height: 18px; text-align: center;">name</td>
-        <td th:text="${user.age}" style="width: 12.5%; height: 18px; text-align: center;">age</td>
-        <td th:text="${user.email}" style="width: 12.5%; height: 18px; text-align: center;">email</td>
-        <td th:text="${user.roles}" style="width: 12.5%; height: 18px; text-align: center;">roles</td>
-        <td th:text="${user.username}" style="width: 12.5%; height: 18px; text-align: center;">username</td>
-        <td th:text="${user.password}" style="width: 12.5%; height: 18px; text-align: center;">pwd</td>
+    <tr style="height: 18px;" th:each="user : ${users}">
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.id}">id</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.name}">name</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.age}">age</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.email}">email</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.roles}">roles</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.username}">username</td>
+        <td style="width: 12.5%; height: 18px; text-align: center;" th:text="${user.password}">pwd</td>
         <td style="width: 12.5%; height: 18px; text-align: center;">
-            <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
+            <form th:action="@{/admin/edit/{id}(id=${user.getId()})}" th:method="GET">
                 <input type="submit" value="Edit">
             </form>
             <br>
-            <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+            <form th:action="@{/admin/delete/{id}(id=${user.getId()})}" th:method="DELETE">
                 <input type="submit" value="Delete">
             </form>
             <br>
@@ -45,13 +45,13 @@
 
 <br>
 <hr>
-<form th:method="GET" th:action="@{/admin/new}">
+<form th:action="@{/admin/new}" th:method="GET">
     <input type="submit" value="Create new user">
 </form>
 
 <br><br>
 
-<form th:method="GET" th:action="@{/logout}">
+<form th:action="@{/logout}" th:method="GET">
     <input type="submit" value="LOGOUT">
 </form>
 

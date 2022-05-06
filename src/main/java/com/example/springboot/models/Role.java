@@ -9,16 +9,14 @@ import java.util.Set;
 @Entity
 public class Role implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(unique = true)
-    private String name;
-
     @Transient
     @ManyToMany(mappedBy = "roles")
     private final Set<User> users = new HashSet<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(unique = true)
+    private String name;
 
     public Role() {
     }
@@ -40,12 +38,12 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<User> getUsers() {
+        return users;
     }
 
     public String getName() {

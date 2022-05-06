@@ -4,6 +4,7 @@ import com.example.springboot.dao.RoleDao;
 import com.example.springboot.models.Role;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 
 @Service
@@ -16,6 +17,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public Role getOrCreateRole(String name) {
         return roleDao.getOrCreateRole(name);
     }

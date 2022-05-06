@@ -6,17 +6,14 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
+    private final RoleDao roleDao;
     @PersistenceContext
     private EntityManager em;
-
-    private final RoleDao roleDao;
 
     public UserDaoImpl(RoleDao roleDao) {
         this.roleDao = roleDao;
@@ -50,12 +47,19 @@ public class UserDaoImpl implements UserDao {
             user.addRole(roleDao.getOrCreateRole(role));
         }
         saveUser(user);
-
     }
 
     @Override
-    public void updateUser(int id, User updatedUser) {
+    public void updateUser(User updatedUser) {
         em.merge(updatedUser);
+    }
+
+    @Override
+    public void updateUser(User updatedUser, String[] roles) {
+        for (String role : roles) {
+            updatedUser.addRole(roleDao.getOrCreateRole(role));
+        }
+        updateUser(updatedUser);
     }
 
     @Override

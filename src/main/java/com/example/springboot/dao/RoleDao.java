@@ -9,5 +9,4 @@ public interface RoleDao {
 
     Set<Role> getRoles();
 
-
 }

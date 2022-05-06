@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -46,20 +45,25 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void saveUser(User user, String[] roles) {
-        userDao.saveUser(user,roles);
+        userDao.saveUser(user, roles);
     }
 
 
     @Override
     @Transactional
-    public void updateUser(int id, User user) {
+    public void updateUser(User user) {
         if (user.getPassword() == null) {
             user.setPassword(getUserById(user.getId()).getPassword());
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        userDao.updateUser(id, user);
+        userDao.updateUser(user);
+    }
 
+    @Override
+    @Transactional
+    public void updateUser(User updatedUser, String[] roles) {
+        userDao.updateUser(updatedUser);
     }
 
     @Override
@@ -77,7 +81,6 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-
         return user;
     }
 }

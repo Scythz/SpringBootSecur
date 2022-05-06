@@ -15,18 +15,15 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService us;
-
     @Autowired
     public UserController(UserService us) {
         this.us = us;
     }
-
 
     @GetMapping
     public String userPage(Principal principal, Model model) {
         model.addAttribute("user", us.loadUserByUsername(principal.getName()));
         return "show";
     }
-
 
 }

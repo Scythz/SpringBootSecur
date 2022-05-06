@@ -15,7 +15,9 @@ public interface UserService extends UserDetailsService {
 
     void saveUser(User user, String[] roles);
 
-    void updateUser(int id, User updatedUser);
+    void updateUser(User updatedUser);
+
+    void updateUser(User updatedUser, String[] roles);
 
     void delete(int id);
 }

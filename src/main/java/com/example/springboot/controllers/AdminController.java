@@ -1,6 +1,5 @@
 package com.example.springboot.controllers;
 
-import com.example.springboot.models.Role;
 import com.example.springboot.models.User;
 import com.example.springboot.service.RoleService;
 import com.example.springboot.service.UserService;
@@ -21,13 +20,11 @@ public class AdminController {
         this.usr = usr;
     }
 
-
     @GetMapping()
     public String tableUsers(Model model) {
         model.addAttribute("users", us.getAllUsers());
         return "tableUsers";
     }
-
 
     @GetMapping("/new")
     public String newUser(Model model) {
@@ -41,7 +38,6 @@ public class AdminController {
         us.saveUser(user, roles);
         return "redirect:/admin";
     }
-
 
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable("id") int id, Model model) {
@@ -57,7 +53,7 @@ public class AdminController {
         for (String role : roles) {
             user.addRole(usr.getOrCreateRole(role));
         }
-        us.updateUser(id, user);
+        us.updateUser(user);
         return "redirect:/admin";
     }
 

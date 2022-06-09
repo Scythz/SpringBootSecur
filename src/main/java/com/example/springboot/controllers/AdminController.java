@@ -46,7 +46,7 @@ public class AdminController {
         return "edit";
     }
 
-    @PutMapping("/edit/{id}")
+    @PatchMapping("/edit/{id}")
     public String patchUser(@PathVariable("id") int id,
                             @ModelAttribute User user,
                             @RequestParam(value = "selectedRoles") String[] roles) {

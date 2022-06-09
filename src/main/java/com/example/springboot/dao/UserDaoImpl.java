@@ -1,6 +1,8 @@
 package com.example.springboot.dao;
 
 import com.example.springboot.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,13 +12,14 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-
     private final RoleDao roleDao;
     @PersistenceContext
     private EntityManager em;
+    private final PasswordEncoder pw;
 
-    public UserDaoImpl(RoleDao roleDao) {
+    public UserDaoImpl(RoleDao roleDao, PasswordEncoder pw) {
         this.roleDao = roleDao;
+        this.pw = pw;
     }
 
     @Override
@@ -59,6 +62,8 @@ public class UserDaoImpl implements UserDao {
         for (String role : roles) {
             updatedUser.addRole(roleDao.getOrCreateRole(role));
         }
+        String pass = pw.encode(updatedUser.getPassword());
+        updatedUser.setPassword(pass);
         updateUser(updatedUser);
     }
 

@@ -41,6 +41,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(pw.encode(user.getPassword()));
         em.persist(user);
     }
 
@@ -62,8 +63,7 @@ public class UserDaoImpl implements UserDao {
         for (String role : roles) {
             updatedUser.addRole(roleDao.getOrCreateRole(role));
         }
-        String pass = pw.encode(updatedUser.getPassword());
-        updatedUser.setPassword(pass);
+        updatedUser.setPassword(pw.encode(updatedUser.getPassword()));
         updateUser(updatedUser);
     }
 
